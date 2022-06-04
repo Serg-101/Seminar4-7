@@ -19,7 +19,7 @@ int[,] FillArray(int firstDemension, int secondDemention)
     return arr;
 }
 
-void SortArray(int[,] arr)   // применим поразрядную сортировку, зная кол-во разрядов (10).
+void SortArray(int[,] arr)   // применим поразрядную сортировку (или Radix sort), зная кол-во разрядов (10).
 {
     int[] tmparr = new int[10];
     int k = 0, len = 0, value = 0;
