@@ -1,12 +1,13 @@
-﻿/*Задача 62: 
-Заполните спирально массив 4 на 4.
 
- 1   2   3   4
-12  13  14   5
-11  16  15   6
-10   9   8   7
-
-*/
+int GetDemension(string message)
+{
+    System.Console.Write(message);
+    while (true)
+        if (int.TryParse(System.Console.ReadLine(),out int number))
+            return number;
+        else
+            System.Console.WriteLine("Неправильный ввод, необходимо целое число больше 0");
+}
 
 void FillArr(byte[,] arr)
 {
@@ -14,19 +15,19 @@ void FillArr(byte[,] arr)
     byte collMax = (byte)arr.GetLength(1);
     byte rowMin = 0, collMin = 0;
     byte i = 0, j = 0, value = 1;
-    byte length = (byte) (rowMax-- * collMax--);
-    arr[i,j]=value;
+    byte length = (byte)(rowMax-- * collMax--);
+    arr[i, j] = value;
     do
     {
-        while (j<collMax) arr[i,++j]=++value;
+        while (j < collMax && value < length) arr[i, ++j] = ++value;
         rowMin++;
-        while (i<rowMax) arr[++i,j]=++value;
+        while (i < rowMax && value < length) arr[++i, j] = ++value;
         collMax--;
-        while (j>collMin) arr[i,--j]=++value;
+        while (j > collMin && value < length) arr[i, --j] = ++value;
         rowMax--;
-        while (i>rowMin) arr[--i,j]=++value;
+        while (i > rowMin && value < length) arr[--i, j] = ++value;
         collMin++;
-    } while (value<length);
+    } while (value < length);
 }
 
 void PrintArray(byte[,] arr)
@@ -41,10 +42,16 @@ void PrintArray(byte[,] arr)
     }
 }
 
-
-System.Console.WriteLine("--------------------------");
-byte[,] arr = new byte[4, 4];
-FillArr(arr);
-PrintArray(arr);
-System.Console.WriteLine("--------------------------");
-
+Console.Clear();
+int firstDemension = GetDemension("Введите размер первого разряда: ");
+int secondDemention = GetDemension("Введите размер второго разряда: ");
+if (firstDemension > 0 & secondDemention > 0)
+{
+    System.Console.WriteLine("--------------------------");
+    byte[,] arr = new byte[firstDemension, secondDemention];
+    FillArr(arr);
+    PrintArray(arr);
+    System.Console.WriteLine("--------------------------");
+}
+else
+    System.Console.WriteLine("введено нулевое значение!");
